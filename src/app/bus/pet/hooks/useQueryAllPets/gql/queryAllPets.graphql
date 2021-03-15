@@ -1,6 +1,6 @@
 query allPets {
   allPets {
-    id
+    id,
     name,
     weight
   }
