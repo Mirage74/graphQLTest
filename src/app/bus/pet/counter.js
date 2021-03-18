@@ -3,16 +3,24 @@ import { useQueryAvailablePets } from "./hooks/useQueryAvailablePets";
 //import { useQueryAllPets } from "./hooks/useQueryAllPets";
 
 export const Counter = () => {
-  const { loading, error, data } = useQueryAvailablePets()
+  const { loading, error, data, networkStatus, ready } = useQueryAvailablePets()
 
 //  const { loading, error, pets } = useQueryAllPets()
     
+
+
+    if (networkStatus === 1) {
+        console.log("loading : ", networkStatus)
+
+    } 
+
+    
     if (loading) {
+        console.log("loading 222 : ", networkStatus)
         return (
             <h5>loading...</h5>
         )
     } 
-        
     
     if (error) {
         return (

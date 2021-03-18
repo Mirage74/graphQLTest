@@ -6,14 +6,15 @@ import { loader } from 'graphql.macro';
 const mutationCreateAccount = loader('./gql/mutationCreateAccount.graphql');
 
 export const useCustomer = () => {
-  const [addUser, { data }] = useMutation(mutationCreateAccount);
+  const [addUser, { data }] = useMutation(mutationCreateAccount)
+
   const [values, setValues] = useState({
     account: {
       name: '',
       username: '',
       password: ''
     }
-  });
+  })
 
 //...prevValues.account,
   const handleChange = (event) => {
@@ -23,26 +24,25 @@ export const useCustomer = () => {
         ...prevValues.account,
         [event.target.name]: event.target.value
       }
-    }));
-  };
+    }))
+  }
 
-  
 
   const save = () => {
-    const { account } = values;
-    console.log(account)
-
+    const { account } = values
+    console.log("account save ", account)    
+    
     addUser({
       variables: {
         account
       }
     })
-  };
+  }
 
-  
+
   return {
     handleChange,
     save,
-    createdAccount: data && data.createAccount
+    createdAccount: data && data.createAccount,
   }
 };
