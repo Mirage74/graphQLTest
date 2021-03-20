@@ -2,11 +2,40 @@ import React from 'react'
 
 import { useCustomer } from './hooks/useCustomer'
 import { useLog } from "./hooks/useLogCustomer";
+import { onError } from "@apollo/client/link/error"
 
 export const Customer = () => {
   const { handleChange, save, createdAccount } = useCustomer()
-  const { handleChangeLogin, getJWT, JWT } = useLog()
-  console.log('jwt ', JWT)
+  const { handleChangeLogin, getJWT, JWT, loading, user, error   } = useLog()
+
+
+  onError(({ graphQLErrors, networkError, operation, forward }) => {
+    console.log("onError")
+    if (graphQLErrors) {
+      console.log("onError 111")
+
+    }
+    if (networkError) {
+      console.log(`[Network error]: ${networkError}`);
+      // if you would also like to retry automatically on
+      // network errors, we recommend that you use
+      // apollo-link-retry
+    }
+  }
+)
+
+const errorJSX = error && 
+  (
+    <p>
+      {error.message}
+    </p>
+  )
+
+
+
+  // if (JWT) {
+  //   console.log('jwt ', JWT)
+  // }
 
   const customerJSX = createdAccount && (
     <p>
@@ -16,7 +45,17 @@ export const Customer = () => {
 
   const jwtJSX = JWT && (
     <p>
+      Hello, {user}
+      <br/>
       { JWT}
+    </p>
+  )
+
+    
+
+  const jwtLoading = loading && (
+    <p>
+      Идет проверка пользователя...
     </p>
   )
 
@@ -35,8 +74,11 @@ export const Customer = () => {
     <input type="text" placeholder="username" name="username" onChange={handleChangeLogin} />
     <input type="password" placeholder="password" name="password" onChange={handleChangeLogin} />
     <button type="submit" onClick={getJWT}>Login</button>
+    {errorJSX}
+    {jwtLoading}
     {jwtJSX}
   </>
+
 
 
 
@@ -47,4 +89,4 @@ export const Customer = () => {
       {loginJSX}
     </>
   )
-};
+}

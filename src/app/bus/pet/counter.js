@@ -14,7 +14,12 @@ export const Counter = () => {
 
     } 
 
-    
+    if (networkStatus) {
+        console.log("networkStatus : ", networkStatus)
+
+    } 
+
+
     if (loading) {
         console.log("loading 222 : ", networkStatus)
         return (
