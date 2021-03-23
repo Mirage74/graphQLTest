@@ -7,6 +7,12 @@ import { useLog } from "./hooks/useLogCustomer";
 export const Customer = () => {
   const { handleChange, save, createdAccount, error } = useCustomer()
   const { handleChangeLogin, getJWT, JWT, loading, user, errorLog } = useLog()
+  
+  //let token = localStorage.getItem('token');
+  //console.log("token 111", token)
+  localStorage.setItem("token", JWT)
+  //token = localStorage.getItem('token');
+  //console.log("token 222", token)
 
   const errorJSX = error &&
     (

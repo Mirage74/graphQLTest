@@ -1,24 +1,46 @@
-//import ApolloClient from "apollo-boost"
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+// Core
+import { ApolloClient } from 'apollo-client'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { setContext } from 'apollo-link-context'
 
+// GraphQL Server
+const uri = 'https://funded-pet-library.moonhighway.com/'
+const httpLink = createHttpLink({
+  uri
+})
 
-//server
-const uri = "https://funded-pet-library.moonhighway.com/"
-// export const client = new ApolloClient({
-//     uri,
-//     defaultOptions: {
-//         mutate: { errorPolicy: 'none' },
-//     }
-// })
+// Auth
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token');
 
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    }
+  }
+})
 
-
+// Cache initialization
+const cache = new InMemoryCache()
 
 
 export const client = new ApolloClient({
-  uri: uri,
-  cache: new InMemoryCache(),
-      defaultOptions: {
-        mutate: { errorPolicy: 'all' },
-    }
-});
+  cache,
+  link: authLink.concat(httpLink),
+  defaultOptions: {
+    mutate: { errorPolicy: 'all' },
+  }
+})
+
+
+
+
+// export const client = new ApolloClient({
+//   uri: uri,
+//   cache: new InMemoryCache(),
+//   defaultOptions: {
+//     mutate: { errorPolicy: 'all' },
+//   }
+// });
