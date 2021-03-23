@@ -6,7 +6,7 @@ import { loader } from 'graphql.macro';
 const mutationCreateAccount = loader('./gql/mutationCreateAccount.graphql');
 
 export const useCustomer = () => {
-  const [addUser, { data }] = useMutation(mutationCreateAccount)
+  const [addUser, { data }, error] = useMutation(mutationCreateAccount)
 
   const [values, setValues] = useState({
     account: {
@@ -44,5 +44,6 @@ export const useCustomer = () => {
     handleChange,
     save,
     createdAccount: data && data.createAccount,
+    error
   }
 };

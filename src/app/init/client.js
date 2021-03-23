@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client'
 
 
 //server
-const uri = "http://funded-pet-library.moonhighway.com/"
+const uri = "https://funded-pet-library.moonhighway.com/"
 // export const client = new ApolloClient({
 //     uri,
 //     defaultOptions: {

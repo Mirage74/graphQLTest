@@ -3,7 +3,7 @@ import { useQueryAvailablePets } from "./hooks/useQueryAvailablePets";
 //import { useQueryAllPets } from "./hooks/useQueryAllPets";
 
 export const Counter = () => {
-  const { loading, error, data, networkStatus, ready } = useQueryAvailablePets()
+  const { loading, error, data, networkStatus  } = useQueryAvailablePets()
 
 //  const { loading, error, pets } = useQueryAllPets()
     

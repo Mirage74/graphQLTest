@@ -2,40 +2,26 @@ import React from 'react'
 
 import { useCustomer } from './hooks/useCustomer'
 import { useLog } from "./hooks/useLogCustomer";
-import { onError } from "@apollo/client/link/error"
+
 
 export const Customer = () => {
-  const { handleChange, save, createdAccount } = useCustomer()
-  const { handleChangeLogin, getJWT, JWT, loading, user, error   } = useLog()
+  const { handleChange, save, createdAccount, error } = useCustomer()
+  const { handleChangeLogin, getJWT, JWT, loading, user, errorLog } = useLog()
+
+  const errorJSX = error &&
+    (
+      <p>
+        {error.message}
+      </p>
+    )
 
 
-  onError(({ graphQLErrors, networkError, operation, forward }) => {
-    console.log("onError")
-    if (graphQLErrors) {
-      console.log("onError 111")
-
-    }
-    if (networkError) {
-      console.log(`[Network error]: ${networkError}`);
-      // if you would also like to retry automatically on
-      // network errors, we recommend that you use
-      // apollo-link-retry
-    }
-  }
-)
-
-const errorJSX = error && 
-  (
-    <p>
-      {error.message}
-    </p>
-  )
-
-
-
-  // if (JWT) {
-  //   console.log('jwt ', JWT)
-  // }
+  const errorLogJSX = errorLog &&
+    (
+      <p>
+        {errorLog.message}
+      </p>
+    )
 
   const customerJSX = createdAccount && (
     <p>
@@ -46,12 +32,12 @@ const errorJSX = error &&
   const jwtJSX = JWT && (
     <p>
       Hello, {user}
-      <br/>
+      <br />
       { JWT}
     </p>
   )
 
-    
+
 
   const jwtLoading = loading && (
     <p>
@@ -65,6 +51,7 @@ const errorJSX = error &&
     <input type="text" placeholder="username" name="username" onChange={handleChange} />
     <input type="password" placeholder="password" name="password" onChange={handleChange} />
     <button type="submit" onClick={save}>Save</button>
+    { errorJSX}
     { customerJSX}
   </>
 
@@ -74,7 +61,7 @@ const errorJSX = error &&
     <input type="text" placeholder="username" name="username" onChange={handleChangeLogin} />
     <input type="password" placeholder="password" name="password" onChange={handleChangeLogin} />
     <button type="submit" onClick={getJWT}>Login</button>
-    {errorJSX}
+    {errorLogJSX}
     {jwtLoading}
     {jwtJSX}
   </>
