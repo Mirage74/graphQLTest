@@ -37,10 +37,3 @@ export const client = new ApolloClient({
 
 
 
-// export const client = new ApolloClient({
-//   uri: uri,
-//   cache: new InMemoryCache(),
-//   defaultOptions: {
-//     mutate: { errorPolicy: 'all' },
-//   }
-// });

@@ -41,6 +41,8 @@ export const useLog = () => {
     })
   }
 
+  let yy = data && data.logIn
+  console.log(yy)
 
   return {
     handleChangeLogin,
@@ -50,4 +52,4 @@ export const useLog = () => {
     JWT: data && data.logIn.token,
     user: logData.account.username
   }
-};
+}

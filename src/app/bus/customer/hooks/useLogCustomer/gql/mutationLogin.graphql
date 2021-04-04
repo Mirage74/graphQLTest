@@ -1,5 +1,6 @@
 mutation login($username: ID!, $password: String!) {
     logIn(username: $username, password: $password) {
         token
+        customer
     }
 }
