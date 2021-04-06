@@ -6,7 +6,7 @@ import { useQueryProfile } from './hooks/useQueryProfile';
 
 export const Profile = () => {
   const { getProfile, loading, error, profile } = useQueryProfile();
-  console.log(profile);
+  //console.log(profile);
 
   const loadProfile = () => {
     getProfile({

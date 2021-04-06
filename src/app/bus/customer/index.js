@@ -1,85 +1,48 @@
-import React from 'react'
+// Core
+import React from 'react';
 
-import { useCustomer } from './hooks/useCustomer'
-import { useLog } from "./hooks/useLogCustomer";
-
+// Hooks
+import { useCustomerCreator } from './hooks/useCustomerCreator';
 
 export const Customer = () => {
-  const { handleChange, save, createdAccount, error } = useCustomer()
-  const { handleChangeLogin, getJWT, JWT, loading, user, errorLog } = useLog()
-  
-  //let token = localStorage.getItem('token');
-  //console.log("token 111", token)
-  localStorage.setItem("token", JWT)
-  //token = localStorage.getItem('token');
-  //console.log("token 222", token)
+  const { handleChange, save, createdAccount, errorCreateUser } = useCustomerCreator();
 
-  const errorJSX = error &&
-    (
-      <p>
-        {error.message}
-      </p>
-    )
-
-
-  const errorLogJSX = errorLog &&
-    (
-      <p>
-        {errorLog.message}
-      </p>
-    )
+  const myRef = React.createRef()
+  const myRef2 = React.createRef()
+  const myRef3 = React.createRef()
 
   const customerJSX = createdAccount && (
     <p>
-      We already created customer with name: { createdAccount.name}
+      Сustomer { createdAccount.name } was successfully created !
     </p>
-  )
+  );
 
-  const jwtJSX = JWT && (
+  
+
+  const saveAndClear = ()  => {
+    save()
+    myRef.current.value = ""
+    myRef2.current.value = ""
+    myRef3.current.value = ""
+  }
+
+
+  const errorCreateJSX = errorCreateUser &&
+  (
     <p>
-      Hello, {user}
-      <br />
-      { JWT}
+      {errorCreateUser.message}
     </p>
   )
-
-
-
-  const jwtLoading = loading && (
-    <p>
-      Идет проверка пользователя...
-    </p>
-  )
-
-  const regJSX = <>
-    <h1>Registration</h1>
-    <input type="text" placeholder="name" name="name" onChange={handleChange} />
-    <input type="text" placeholder="username" name="username" onChange={handleChange} />
-    <input type="password" placeholder="password" name="password" onChange={handleChange} />
-    <button type="submit" onClick={save}>Save</button>
-    { errorJSX}
-    { customerJSX}
-  </>
-
-
-  const loginJSX = <>
-    <h1>Login</h1>
-    <input type="text" placeholder="username" name="username" onChange={handleChangeLogin} />
-    <input type="password" placeholder="password" name="password" onChange={handleChangeLogin} />
-    <button type="submit" onClick={getJWT}>Login</button>
-    {errorLogJSX}
-    {jwtLoading}
-    {jwtJSX}
-  </>
-
-
-
 
   return (
     <>
-      {regJSX}
-      <br />
-      {loginJSX}
+      <h1>Registration</h1>
+      <input ref={myRef} type="text" placeholder="name" name="name" onChange={handleChange} />
+      <input ref={myRef2} type="text" placeholder="username" name="username" onChange={handleChange} />
+      <input ref={myRef3} type="password" placeholder="password" name="password" onChange={handleChange} />
+      <button type="submit" onClick={saveAndClear}>Save</button>
+      {errorCreateJSX}
+      { customerJSX }
     </>
   )
-}
+};

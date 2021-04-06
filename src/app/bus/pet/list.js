@@ -19,7 +19,7 @@ export const List = () => {
       </p>
     )
   }
-  console.log("pets : ", pets)
+  //console.log("pets : ", pets)
 
 
   const petsJSX = pets.map(({id, name, weight}) => (

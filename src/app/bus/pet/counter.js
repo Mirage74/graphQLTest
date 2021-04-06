@@ -10,18 +10,18 @@ export const Counter = () => {
 
 
     if (networkStatus === 1) {
-        console.log("loading : ", networkStatus)
+        //console.log("loading : ", networkStatus)
 
     } 
 
     if (networkStatus) {
-        console.log("networkStatus : ", networkStatus)
+        //console.log("networkStatus : ", networkStatus)
 
     } 
 
 
     if (loading) {
-        console.log("loading 222 : ", networkStatus)
+        //console.log("loading 222 : ", networkStatus)
         return (
             <h5>loading...</h5>
         )
