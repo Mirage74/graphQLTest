@@ -1,15 +1,43 @@
 // Core
 import React from 'react';
 
+//const { Formik } = formik;
+// import Col from 'react-bootstrap/Col'
+// import Button from 'react-bootstrap/Button'
+// import InputGroup from 'react-bootstrap/InputGroup'
+
+
 // Hooks
 import { useCustomerCreator } from './hooks/useCustomerCreator';
+//import {useFormik} from './hooks/useFormik'
+import { useState } from 'react';
+
+
+
+
+
+
 
 export const Customer = () => {
+  const [form, setForm] = useState()
   const { handleChange, save, createdAccount, errorCreateUser } = useCustomerCreator();
+  
+
+  
+
+ 
+ 
+
+
+
+  
+  //const { form} = useFormik
+  
 
   const myRef = React.createRef()
   const myRef2 = React.createRef()
   const myRef3 = React.createRef()
+  //console.log("form ", form)
 
   const customerJSX = createdAccount && (
     <p>
@@ -36,6 +64,7 @@ export const Customer = () => {
 
   return (
     <>
+
       <h1>Registration</h1>
       <input ref={myRef} type="text" placeholder="name" name="name" onChange={handleChange} />
       <input ref={myRef2} type="text" placeholder="username" name="username" onChange={handleChange} />

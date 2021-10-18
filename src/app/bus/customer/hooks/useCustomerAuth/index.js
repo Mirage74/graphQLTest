@@ -10,6 +10,7 @@ import { useForm } from '../useForm';
 const mutationLogIn = loader('./gql/mutationLogIn.graphql');
 
 export const useCustomerAuth = () => {
+  
   const [_logIn, { data, error }] = useMutation(mutationLogIn);
   const errorLog = error
   const { form, handleChange } = useForm({
@@ -19,7 +20,7 @@ export const useCustomerAuth = () => {
 
   
   
-  
+  console.log("data : ", data)
 
   const authorizedCustomer = data && data.logIn;
   const token = authorizedCustomer && authorizedCustomer.token;
@@ -29,15 +30,29 @@ export const useCustomerAuth = () => {
   }
 
   const logIn = () => {
+    //console.log("form : ", form)
     _logIn({
       variables: form
     });
   };
 
+  const logInFormik = (name, pass) => {
+    // console.log("name : ", name)
+    // console.log("pass : ", pass)
+    const dataLog = {
+      username : name,
+      password : pass
+    }
+    _logIn({
+      variables: dataLog
+    });
+  };
+
   return {
     logIn,
+    logInFormik,
     errorLog,
     handleChange,
-    authorizedCustomer,
+    authorizedCustomer
   }
 };
