@@ -45,6 +45,7 @@ export const Login = () => {
   const authorizedCustomerJSX = authorizedCustomer && (
     <>
       <p>Authorized Customer: {authorizedCustomer.customer.name}</p>
+      <p>Token: {authorizedCustomer.token}</p>
     </>
   );
 

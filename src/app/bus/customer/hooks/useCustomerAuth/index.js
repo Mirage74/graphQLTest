@@ -14,8 +14,8 @@ export const useCustomerAuth = () => {
   const [_logIn, { data, error }] = useMutation(mutationLogIn);
   const errorLog = error
   const { form, handleChange } = useForm({
-    username: '',
-    password: ''
+    //username: '',
+    //password: ''
   });
 
   
@@ -29,12 +29,12 @@ export const useCustomerAuth = () => {
     localStorage.setItem('token', token);
   }
 
-  const logIn = () => {
+  //const logIn = () => {
     //console.log("form : ", form)
-    _logIn({
-      variables: form
-    });
-  };
+    //_logIn({
+      //variables: form
+    //});
+  //};
 
   const logInFormik = (name, pass) => {
     // console.log("name : ", name)
@@ -49,7 +49,7 @@ export const useCustomerAuth = () => {
   };
 
   return {
-    logIn,
+    //logIn,
     logInFormik,
     errorLog,
     handleChange,

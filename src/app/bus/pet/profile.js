@@ -11,7 +11,7 @@ export const Profile = () => {
   const loadProfile = () => {
     getProfile({
       variables: {
-        id: 'C-1'
+        id: 'C-2'
       }
     });
   };
